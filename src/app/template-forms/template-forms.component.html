@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-md-5" style="border: 10px; margin:10px; padding:10px;">
+  <form  (ngSubmit)="onAddItem()" #f="ngForm" > 
+    <div 
+    id="user-data"
+    ngModelGroup="userData"
+    #userData="ngModelGroup">
+    
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email"
+       class="form-control"
+       ngModel
+       name="email"
+       email
+       #email="ngModel"
+       placeholder="Enter email" required>
+
+      <!-- <span class="help-block"  style="color:rgb(150, 144, 144)" *ngIf="!email.valid && email.touched" >please select valid Email...!</span> -->
+    </div>
+
+    <button
+    class="btn btn-default"
+    type="button"
+    (click)="SuggestUsername()">Suggest an Username</button>
+
+    <div class="form-group">
+        <label >Example select</label>
+        <select class="form-control" id="exampleSelect1" name="Option" [ngModel]="Option" required>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <textarea name="questionanswer" class="form-control" rows="3" [(ngModel)]="answer" required></textarea>
+    </div>
+          <p>Your Value is:{{answer}}</p>
+          <div class="radio" *ngFor="let gender of genders">
+
+              <input type="radio" ngModel name="gender" [value]="gender">
+              {{gender}}
+
+          </div>
+          
+          <span class="help-block"  style="color:rgb(150, 144, 144)" *ngIf="!userData.valid && userData.touched" >
+            please select valid Email...!</span> 
+          <button type="submit" class="btn btn-primary"  [disabled]="!f.valid">Submit</button>
+</div>
+        
+</form>
+</div>
+<hr>
+<div class="row" *ngIf="submitted">
+  <div class="col-xs-12">
+    <h3>Your Data</h3>
+    <p>Mail: {{ user.email }}</p>
+    <p>Secret Question: Your first {{ user.questionanswer }}</p>
+    <p>Option: {{ user.Option }}</p>
+    <p>Gender: {{ user.gender }}</p>
+  </div>
+</div>
+</div>

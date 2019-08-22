@@ -1,0 +1,59 @@
+<div class="row container">
+    <div class="col-md-5 row" style="border: 10px; margin:10px; padding:10px;">
+
+
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <div formGroupName="userData">
+      <label for="username">Username</label>
+    <div class="form-group" >
+          <input 
+          type="text"
+          name="username"  
+          id="username"
+          formControlName="username"
+          class="form-control">
+          <span
+          *ngIf="!signupForm.get('userData.username').valid && signupForm.get('userData.username').touched"
+          class="help-block">
+          <span *ngIf="signupForm.get('userData.username').errors['nameIsForbidden']">This name is invalid!</span>
+          <span *ngIf="signupForm.get('userData.username').errors['required']">This field is required!</span>
+
+
+        </span>
+    
+    </div>
+
+    <label for="Email">Email</label>
+    <div class="form-group" >
+            <input 
+            type="text"
+            id="email"
+            formControlName="email"
+            class="form-control">
+            <span
+            *ngIf="!signupForm.get('userData.email').valid && signupForm.get('userData.email').touched"
+            class="help-block">Please enter a valid email!</span>
+
+    </div>
+  </div>
+  <div formArrayName="player">
+      <h4>Your Team is as:</h4>
+      <button
+        class="btn btn-default"
+        type="button"
+        (click)="onAddPlayer()">Add player</button>
+      <div
+        class="form-group"
+        *ngFor="let playerControl of signupForm.get('player').controls; let i = index">
+        <input type="text" class="form-control" [formControlName]="i">
+      </div>
+    </div>
+    <span
+      *ngIf="!signupForm.valid && signupForm.touched"
+      class="help-block">Please enter valid data!</span>
+
+  <button class="btn btn-primary" type="submit">Submit</button>
+
+</form>
+</div>
+</div>
